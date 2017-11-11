@@ -253,7 +253,6 @@ a:active {
 #trailer{
   background-color: black;
   flex-wrap: nowrap;
-  width: 100%;
   align-items: center;
   display: flex;
   align-items: center;
@@ -263,7 +262,7 @@ a:active {
 #trailer iframe {
   margin:0 ;
   width: 100%;
-  height: auto;
+  height: 50vh;
 }
 
 
