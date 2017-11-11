@@ -269,14 +269,19 @@ a:active {
 
 
 .links {
+  margin-top: 5vh;
+  width: 100vw;
   display: flex;
+  justify-content: center;
   font-family: helvetica;
-  font-size: 14pt;
+  font-size: 18pt;
+  font-weight: bold;
   color:gray;
 
 }
 
 .social{
+  margin-top: 10px;
   display: flex;
   justify-content: space-around;
   align-items: center;
