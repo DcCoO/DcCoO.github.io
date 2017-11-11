@@ -281,6 +281,7 @@ a:active {
 
 .social{
   margin-top: 10px;
+  margin-bottom: 10px;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -326,6 +327,7 @@ a:active {
   justify-content: center;
   align-items: center;
   margin-right:10vw;
+  margin-bottom: 10px;
 }
 
 
