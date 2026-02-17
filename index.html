@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio | Daniel Candido</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&display=swap');
+
+    :root {
+      --bg: #e9f0ff;
+      --bg-2: #f4f8ff;
+      --surface: rgba(255, 255, 255, 0.82);
+      --surface-strong: #ffffff;
+      --text: #0f172a;
+      --muted: #475569;
+      --primary: #0ea5e9;
+      --primary-2: #2563eb;
+      --primary-soft: #dbeafe;
+      --border: rgba(30, 41, 59, 0.14);
+      --shadow: 0 24px 60px rgba(15, 23, 42, 0.16);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Sora", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background:
+        radial-gradient(circle at 8% 8%, #c7d2fe 0%, transparent 38%),
+        radial-gradient(circle at 90% 0%, #99f6e4 0%, transparent 35%),
+        linear-gradient(165deg, var(--bg) 0%, var(--bg-2) 58%, #eef4ff 100%);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 36px 16px;
+    }
+
+    .portfolio {
+      max-width: 1040px;
+      margin: 0 auto;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 26px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+    }
+
+    .header {
+      background:
+        radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.18), transparent 45%),
+        linear-gradient(130deg, #0f172a 0%, #1d4ed8 52%, #06b6d4 100%);
+      color: #ffffff;
+      padding: 42px 30px;
+    }
+
+    .header h1 {
+      font-size: clamp(2rem, 3.4vw, 2.8rem);
+      margin-bottom: 10px;
+      letter-spacing: 0.5px;
+      font-weight: 800;
+    }
+
+    .header-role {
+      color: rgba(255, 255, 255, 0.9);
+      font-size: clamp(1.1rem, 2.2vw, 1.45rem);
+      font-weight: 700;
+      max-width: 680px;
+      line-height: 1.35;
+    }
+
+    .header-location {
+      margin-top: 10px;
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 0.92rem;
+      line-height: 1.4;
+    }
+
+    .contact-items {
+      margin-top: 10px;
+      display: grid;
+      gap: 8px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    .contact-icon {
+      width: 18px;
+      height: 18px;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+
+    .contact-link {
+      color: var(--text);
+      text-decoration: none;
+      transition: color 0.18s ease;
+    }
+
+    .contact-link:hover {
+      text-decoration: underline;
+      color: var(--primary-2);
+    }
+
+    .awards-items {
+      display: grid;
+      gap: 8px;
+    }
+
+    .awards-item {
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 0.97rem;
+    }
+
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 16px 18px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: blur(8px);
+    }
+
+    .tab-btn {
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.85);
+      color: var(--muted);
+      padding: 10px 16px;
+      border-radius: 999px;
+      font-size: 0.87rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.22s ease;
+    }
+
+    .tab-btn:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 18px rgba(15, 69, 120, 0.12);
+    }
+
+    .tab-btn.active {
+      background: linear-gradient(130deg, var(--primary-soft) 0%, #ecf6ff 100%);
+      border-color: rgba(37, 99, 235, 0.3);
+      color: #1e3a8a;
+    }
+
+    .content {
+      padding: 28px 24px 32px;
+    }
+
+    .tab-panel {
+      display: none;
+      animation: fadeIn 0.25s ease;
+    }
+
+    .tab-panel.active {
+      display: block;
+    }
+
+    .tab-panel h2 {
+      font-size: 1.45rem;
+      margin-bottom: 14px;
+      color: #0f172a;
+    }
+
+    .tab-panel h3 {
+      font-size: 1rem;
+      margin: 22px 0 10px;
+      color: #1e3a8a;
+      letter-spacing: 0.2px;
+    }
+
+    .tab-panel p,
+    .tab-panel li {
+      color: var(--muted);
+      line-height: 1.65;
+      font-size: 0.94rem;
+    }
+
+    ul {
+      margin-left: 20px;
+      margin-top: 8px;
+    }
+
+    .skills-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 12px;
+    }
+
+    .skill-chip {
+      border: 1px solid rgba(37, 99, 235, 0.2);
+      background: linear-gradient(180deg, #f8fbff 0%, #eaf2ff 100%);
+      color: #1e3a8a;
+      padding: 8px 11px;
+      border-radius: 999px;
+      font-size: 0.84rem;
+      font-weight: 600;
+      line-height: 1;
+      user-select: none;
+      cursor: default;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .skill-chip:hover {
+      transform: translateY(-2px) scale(1.02);
+      border-color: rgba(37, 99, 235, 0.38);
+      background: linear-gradient(180deg, #ffffff 0%, #e0ebff 100%);
+      box-shadow: 0 8px 16px rgba(37, 99, 235, 0.16);
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 12px;
+      align-items: start;
+    }
+
+    .project-panel {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: var(--surface-strong);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      align-self: start;
+      min-height: 365px;
+      box-shadow: 0 16px 34px rgba(15, 23, 42, 0.1);
+      transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+    }
+
+    .project-panel:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 24px 38px rgba(15, 23, 42, 0.14);
+      border-color: rgba(37, 99, 235, 0.24);
+    }
+
+    .project-panel.project-panel-expanded {
+      min-height: 0;
+    }
+
+    .project-store-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      z-index: 2;
+      border: 1px solid rgba(255, 255, 255, 0.85);
+      background: rgba(30, 58, 138, 0.9);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 999px;
+      padding: 6px 11px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      line-height: 1;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .project-store-btn:hover {
+      transform: translateY(-1px);
+      background: rgba(14, 165, 233, 0.96);
+    }
+
+    .project-gif {
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+      display: block;
+      border-bottom: 1px solid var(--border);
+      background: #e8efff;
+    }
+
+    .project-content {
+      padding: 12px 12px 12px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      gap: 8px;
+    }
+
+    .project-title {
+      font-size: 0.95rem;
+      color: #0f172a;
+      line-height: 1.35;
+    }
+
+    .project-skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .project-skills .skill-chip {
+      font-size: 0.72rem;
+      padding: 6px 8px;
+      pointer-events: none;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .project-toggle {
+      border: 1px solid rgba(37, 99, 235, 0.24);
+      background: linear-gradient(180deg, #f8fbff 0%, #e7efff 100%);
+      color: #1e40af;
+      padding: 6px 10px;
+      font-size: 0.76rem;
+      line-height: 1.1;
+      cursor: pointer;
+      width: auto;
+      text-align: center;
+      align-self: center;
+      margin-top: auto;
+      font-weight: 600;
+      text-transform: none;
+      border-radius: 999px;
+      transition: all 0.2s ease;
+    }
+
+    .project-toggle:hover {
+      color: #1d4ed8;
+      border-color: rgba(37, 99, 235, 0.4);
+      transform: translateY(-1px);
+    }
+
+    .project-desc {
+      display: none;
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: 0.9rem;
+      border-top: 1px dashed rgba(37, 99, 235, 0.22);
+      margin-top: 8px;
+      padding-top: 10px;
+    }
+
+    .project-desc.open {
+      display: block;
+    }
+
+    .card {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px;
+      background: var(--surface-strong);
+      box-shadow: 0 10px 22px rgba(12, 35, 64, 0.06);
+    }
+
+    .meta {
+      color: #64748b;
+      font-size: 0.85rem;
+      margin-top: 6px;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(4px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 16px 10px;
+      }
+
+      .header,
+      .content {
+        padding: 18px 16px;
+      }
+
+      .tabs {
+        padding: 12px 10px;
+      }
+
+      .tab-btn {
+        width: 100%;
+        text-align: center;
+      }
+
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .project-panel {
+        min-height: 0;
+      }
+    }
+
+    @media (min-width: 641px) and (max-width: 900px) {
+      .projects-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="portfolio">
+    <header class="header">
+      <h1>Daniel Candido</h1>
+      <p class="header-role">Senior Unity Engineer</p>
+      <p class="header-location">Recife, Pernambuco, Brazil</p>
+    </header>
+
+    <nav class="tabs" role="tablist" aria-label="Portfolio tabs">
+      <button class="tab-btn active" role="tab" aria-selected="true" aria-controls="about" id="tab-about" data-tab="about">About</button>
+      <button class="tab-btn" role="tab" aria-selected="false" aria-controls="projects" id="tab-projects" data-tab="projects">Published Projects</button>
+      <button class="tab-btn" role="tab" aria-selected="false" aria-controls="experience" id="tab-experience" data-tab="experience">Work Experience</button>
+      <button class="tab-btn" role="tab" aria-selected="false" aria-controls="education" id="tab-education" data-tab="education">Education</button>
+      <button class="tab-btn" role="tab" aria-selected="false" aria-controls="awards" id="tab-awards" data-tab="awards">Awards</button>
+    </nav>
+
+    <section class="content">
+      <article class="tab-panel active" id="about" role="tabpanel" aria-labelledby="tab-about">
+        <p>
+          I'm a Senior Unity Engineer who has been making games professionally and as a hobby for a long time. I've collaborated in a lot of published projects (casuals, hyper-casuals, multiplayers, AAA games, etc.), building architectures, mechanics, systems, shaders, tools and everything necessary to have the projects running and create great experiences. I've also been integrating AI tools into my development process to boost productivity and speed up prototyping, testing and bug fixing.
+        </p>
+
+        <h3>Programming Languages</h3>
+        <div class="skills-wrap" aria-label="Programming Languages">
+          <span class="skill-chip" role="img" aria-label="C#">C#</span>
+          <span class="skill-chip" role="img" aria-label="C/C++">C/C++</span>
+          <span class="skill-chip" role="img" aria-label="Javascript">Javascript</span>
+          <span class="skill-chip" role="img" aria-label="Java">Java</span>
+          <span class="skill-chip" role="img" aria-label="Python">Python</span>
+        </div>
+
+        <h3>Skills</h3>
+        <div class="skills-wrap" aria-label="Skills">
+          <span class="skill-chip" role="img" aria-label="Game Development">Game Development</span>
+          <span class="skill-chip" role="img" aria-label="Unity">Unity</span>
+          <span class="skill-chip" role="img" aria-label="Photon Quantum">Photon Quantum</span>
+          <span class="skill-chip" role="img" aria-label="Mirror">Mirror</span>
+          <span class="skill-chip" role="img" aria-label="AI Tools (Cursor/Claude Code/GPT Codex)">AI Tools (Cursor/Claude Code/GPT Codex)</span>
+          <span class="skill-chip" role="img" aria-label="SOLID Principles">SOLID Principles</span>
+          <span class="skill-chip" role="img" aria-label="Design Patterns">Design Patterns</span>
+          <span class="skill-chip" role="img" aria-label="Mobile">Mobile</span>
+          <span class="skill-chip" role="img" aria-label="PC/Console">PC/Console</span>
+          <span class="skill-chip" role="img" aria-label="2D/3D Mathematics and Physics">2D/3D Mathematics and Physics</span>
+          <span class="skill-chip" role="img" aria-label="Algorithms and Data Structures">Algorithms and Data Structures</span>
+          <span class="skill-chip" role="img" aria-label="Shaders">Shaders</span>
+          <span class="skill-chip" role="img" aria-label="VFX Graph">VFX Graph</span>
+          <span class="skill-chip" role="img" aria-label="Universal Render Pipeline">Universal Render Pipeline</span>
+          <span class="skill-chip" role="img" aria-label="High Definition Render Pipeline">High Definition Render Pipeline</span>
+          <span class="skill-chip" role="img" aria-label="In App Purchase">In App Purchase</span>
+          <span class="skill-chip" role="img" aria-label="Analytics">Analytics</span>
+          <span class="skill-chip" role="img" aria-label="Ads SDKs">Ads SDKs</span>
+          <span class="skill-chip" role="img" aria-label="Playable Ads">Playable Ads</span>
+          <span class="skill-chip" role="img" aria-label="Addressables">Addressables</span>
+          <span class="skill-chip" role="img" aria-label="Agile Methodologies">Agile Methodologies</span>
+          <span class="skill-chip" role="img" aria-label="UI Development">UI Development</span>
+          <span class="skill-chip" role="img" aria-label="UGUI">UGUI</span>
+          <span class="skill-chip" role="img" aria-label="UI Toolkit">UI Toolkit</span>
+          <span class="skill-chip" role="img" aria-label="Editor Tooling">Editor Tooling</span>
+          <span class="skill-chip" role="img" aria-label="Profiling">Profiling</span>
+          <span class="skill-chip" role="img" aria-label="Optimization">Optimization</span>
+          <span class="skill-chip" role="img" aria-label="Refactoring">Refactoring</span>
+          <span class="skill-chip" role="img" aria-label="Game Architecture">Game Architecture</span>
+          <span class="skill-chip" role="img" aria-label="Git/GitHub">Git/GitHub</span>
+          <span class="skill-chip" role="img" aria-label="CI/CD">CI/CD</span>
+          <span class="skill-chip" role="img" aria-label="Unit Tests">Unit Tests</span>
+          <span class="skill-chip" role="img" aria-label="Assemblies">Assemblies</span>
+          <span class="skill-chip" role="img" aria-label="DOTS/ECS">DOTS/ECS</span>
+          <span class="skill-chip" role="img" aria-label="LiveOps">LiveOps</span>
+          <span class="skill-chip" role="img" aria-label="Backend Integration">Backend Integration</span>
+          <span class="skill-chip" role="img" aria-label="Firebase">Firebase</span>
+          <span class="skill-chip" role="img" aria-label="REST API">REST API</span>
+        </div>
+
+        <h3>Soft Skills</h3>
+        <div class="skills-wrap" aria-label="Soft Skills">
+          <span class="skill-chip" role="img" aria-label="Effective Communication">Effective Communication</span>
+          <span class="skill-chip" role="img" aria-label="Problem Solving">Problem Solving</span>
+          <span class="skill-chip" role="img" aria-label="Teamwork">Teamwork</span>
+          <span class="skill-chip" role="img" aria-label="Leadership">Leadership</span>
+          <span class="skill-chip" role="img" aria-label="Time Management">Time Management</span>
+          <span class="skill-chip" role="img" aria-label="Code Reviews">Code Reviews</span>
+        </div>
+
+        <h3>Languages</h3>
+        <div class="skills-wrap" aria-label="Languages">
+          <span class="skill-chip" role="img" aria-label="Portuguese Native">Portuguese (Native)</span>
+          <span class="skill-chip" role="img" aria-label="English Professional">English (Professional)</span>
+          <span class="skill-chip" role="img" aria-label="Spanish Medium">Spanish (Medium)</span>
+        </div>
+
+        <h3>Contact</h3>
+        <div class="contact-items">
+          <p class="contact-item"><img class="contact-icon" src="Email.png" alt="Email icon" /> <a class="contact-link" href="mailto:dcctexx@gmail.com">dcctexx@gmail.com</a></p>
+          <p class="contact-item"><img class="contact-icon" src="WhatsApp.png" alt="WhatsApp icon" /> <a class="contact-link" href="https://wa.me/5581988288535" target="_blank" rel="noopener noreferrer">+55 81 988288535</a></p>
+          <p class="contact-item"><img class="contact-icon" src="Linkedin.png" alt="LinkedIn icon" /> <a class="contact-link" href="https://www.linkedin.com/in/dctex" target="_blank" rel="noopener noreferrer">linkedin.com/in/dctex</a></p>
+        </div>
+      </article>
+
+      <article class="tab-panel" id="projects" role="tabpanel" aria-labelledby="tab-projects">
+        <div class="projects-grid">
+          <article class="project-panel" data-store-url="https://play.google.com/store/search?q=2%20Player%20Games%20JindoBlu&c=apps">
+            <img class="project-gif" src="gifs/2 player games.gif" alt="2 Player Games" />
+            <div class="project-content">
+              <h4 class="project-title">2 Player Games</h4>
+              <button class="project-toggle" type="button" aria-expanded="false">See role details</button>
+              <div class="project-desc">
+                <ul>
+                  <li>Implemented several games.</li>
+                  <li>Implemented AI bots with support for different difficulty levels.</li>
+                  <li>Updated libraries and outdated games.</li>
+                  <li>Integrated tools to improve development.</li>
+                  <li>General bug fixing.</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+          <article class="project-panel" data-store-url="https://play.google.com/store/search?q=1%202%203%204%20Player%20Games%20JindoBlu&c=apps">
+            <img class="project-gif" src="gifs/4 player games.gif" alt="4 Player Games" />
+            <div class="project-content">
+              <h4 class="project-title">1 2 3 4 Player Games</h4>
+              <button class="project-toggle" type="button" aria-expanded="false">See role details</button>
+              <div class="project-desc">
+                <ul>
+                  <li>Implemented several games.</li>
+                  <li>Implemented AI bots with support for different difficulty levels.</li>
+                  <li>Ported games from 2 Player Games and added support for 3 and 4 players.</li>
+                  <li>Integrated tools to improve development.</li>
+                  <li>General bug fixing.</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+          <article class="project-panel" data-store-url="https://play.google.com/store/search?q=Chef%20Rescue%20game&c=apps">
+            <img class="project-gif" src="gifs/chef rescue.gif" alt="Chef Rescue" />
+            <div class="project-content">
+              <h4 class="project-title">Chef Rescue</h4>
+              <button class="project-toggle" type="button" aria-expanded="false">See role details</button>
+              <div class="project-desc">
+                <ul>
+                  <li>Developed tutorial systems related to receipts and in-game items.</li>
+                  <li>Fixed bugs related to graphics, sprite layering and visual artifacts.</li>
+                  <li>Ported the game to newer Unity versions.</li>
+                  <li>Updated outdated SDKs including IAP, analytics and ads.</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+          <article class="project-panel" data-store-url="https://play.google.com/store/search?q=Cookie%20Jam%20match%203&c=apps">
+            <img class="project-gif" src="gifs/cookie jam.gif" alt="Cookie Jam" />
+            <div class="project-content">
+              <h4 class="project-title">Cookie Jam</h4>
+              <button class="project-toggle" type="button" aria-expanded="false">See role details</button>
+              <div class="project-desc">
+                <ul>
+                  <li>Implemented new matching features and effects.</li>
+                  <li>Implemented new screens and integrated new game UI flows.</li>
+                  <li>Fixed bugs in the cheat system for testing.</li>
+                  <li>Fixed multiple bugs related to matching behavior and game events.</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+          <article class="project-panel" data-store-url="https://play.google.com/store/search?q=El%20Reino%20Infantil%20game&c=apps">
+            <img class="project-gif" src="gifs/el reino infantil.gif" alt="El Reino Infantil" />
+            <div class="project-content">
+              <h4 class="project-title">El Reino Infantil</h4>
+              <button class="project-toggle" type="button" aria-expanded="false">See role details</button>
+              <div class="project-desc">
+                <ul>
+                  <li>Developed several minigames inside the El Reino Infantil metagame.</li>
+                  <li>Worked on backend (Firebase/TypeScript), uploading 400,000 QRCode values and handling Cloud Functions to keep access secure.</li>
+                  <li>Integrated QRCode detection with AR so scanned cards spawned AR models.</li>
+                  <li>Ported and updated games to newer Cocos Creator versions.</li>
+                  <li>Integrated multiple APIs (IAP, analytics, authentication, etc.).</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+          <article class="project-panel" data-store-url="https://play.google.com/store/search?q=Growtopia&c=apps">
+            <img class="project-gif" src="gifs/growtopia.gif" alt="Growtopia" />
+            <div class="project-content">
+              <h4 class="project-title">Growtopia</h4>
+              <button class="project-toggle" type="button" aria-expanded="false">See role details</button>
+              <div class="project-desc">
+                <ul>
+                  <li>Fixed several bugs in client-server communication.</li>
+                  <li>Fixed several bugs in game mechanics.</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+          <article class="project-panel" data-store-url="https://play.google.com/store/search?q=Logic%20Pic%20game&c=apps">
+            <img class="project-gif" src="gifs/logic pic.gif" alt="Logic Pic" />
+            <div class="project-content">
+              <h4 class="project-title">Logic Pic</h4>
+              <button class="project-toggle" type="button" aria-expanded="false">See role details</button>
+              <div class="project-desc">
+                <ul>
+                  <li>Developed tutorial system.</li>
+                  <li>Fixed several game flow bugs.</li>
+                  <li>Ported the game to newer Unity versions to replace old Android libraries.</li>
+                  <li>Updated outdated SDKs including IAP, analytics and ads.</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+          <article class="project-panel" data-store-url="https://play.google.com/store/search?q=Overloot%20game&c=apps">
+            <img class="project-gif" src="gifs/overloot.gif" alt="Overloot" />
+            <div class="project-content">
+              <h4 class="project-title">Overloot</h4>
+              <button class="project-toggle" type="button" aria-expanded="false">See role details</button>
+              <div class="project-desc">
+                <ul>
+                  <li>Fixed localization issues.</li>
+                  <li>Implemented inventory placement scheme for collected items during gameplay.</li>
+                  <li>Updated old SDKs.</li>
+                  <li>General bug fixing.</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+          <article class="project-panel" data-store-url="https://play.google.com/store/search?q=Silhouette%20Art%20game&c=apps">
+            <img class="project-gif" src="gifs/silhouette art.gif" alt="Silhouette Art" />
+            <div class="project-content">
+              <h4 class="project-title">Silhouette Art</h4>
+              <button class="project-toggle" type="button" aria-expanded="false">See role details</button>
+              <div class="project-desc">
+                <ul>
+                  <li>Developed level system.</li>
+                  <li>Developed painting and peeling paper mechanics.</li>
+                  <li>Developed camera transition effects and painting tools used during pre-production.</li>
+                  <li>Integrated haptics.</li>
+                  <li>Integrated analytics API.</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+          <article class="project-panel" data-store-url="https://play.google.com/store/search?q=Tetris%20N3TWORK&c=apps">
+            <img class="project-gif" src="gifs/tetris.gif" alt="Tetris" />
+            <div class="project-content">
+              <h4 class="project-title">Tetris</h4>
+              <button class="project-toggle" type="button" aria-expanded="false">See role details</button>
+              <div class="project-desc">
+                <ul>
+                  <li>Implemented several backend features.</li>
+                  <li>Implemented parts of Adventure Mode.</li>
+                  <li>Implemented conditional events to toggle features based on server data.</li>
+                  <li>Implemented new game flows and new screens.</li>
+                  <li>Participated in code reviews across multiple features.</li>
+                  <li>Added new options to the cheat menu for testing.</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+          <article class="project-panel" data-store-url="https://store.steampowered.com/app/874260/The_Forgotten_City/">
+            <img class="project-gif" src="gifs/the forgotten city.gif" alt="The Forgotten City" />
+            <div class="project-content">
+              <h4 class="project-title">The Forgotten City</h4>
+              <button class="project-toggle" type="button" aria-expanded="false">See role details</button>
+              <div class="project-desc">
+                <ul>
+                  <li>Improved physics performance by splitting physical events across controllers to avoid unnecessary updates.</li>
+                  <li>Improved the day-night cycle.</li>
+                  <li>Fixed procedural light generation to avoid excessive light instantiation and rendering overhead.</li>
+                  <li>General bug fixing.</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+          <article class="project-panel" data-store-url="https://play.google.com/store/search?q=We%20Are%20Illuminati%20game&c=apps">
+            <img class="project-gif" src="gifs/we are illuminati.gif" alt="We Are Illuminati" />
+            <div class="project-content">
+              <h4 class="project-title">We Are Illuminati</h4>
+              <button class="project-toggle" type="button" aria-expanded="false">See role details</button>
+              <div class="project-desc">
+                <ul>
+                  <li>Ported the game from an outdated engine to Unity.</li>
+                  <li>Implemented money/currency system.</li>
+                  <li>Integrated game UI.</li>
+                  <li>Developed cheats for testing.</li>
+                  <li>Implemented conspiracy price update algorithm.</li>
+                  <li>Created MVC scheme to improve performance on frequent currency updates.</li>
+                  <li>Integrated SDKs such as IAP, analytics and ads.</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+          <article class="project-panel" data-store-url="https://store.steampowered.com/app/1571460/Zorro_The_Chronicles/">
+            <img class="project-gif" src="gifs/zorro the chronicles.gif" alt="Zorro The Chronicles" />
+            <div class="project-content">
+              <h4 class="project-title">Zorro The Chronicles</h4>
+              <button class="project-toggle" type="button" aria-expanded="false">See role details</button>
+              <div class="project-desc">
+                <ul>
+                  <li>Implemented inventory system and part of the fighting mechanics.</li>
+                  <li>Integrated parts of game UI.</li>
+                  <li>Fixed mission system bugs that froze progression.</li>
+                  <li>Fixed save system failures.</li>
+                  <li>Implemented localization system.</li>
+                  <li>Fixed joystick input handling issues in Unity Input System.</li>
+                  <li>Fixed critical issues in Addressables and async level loading.</li>
+                  <li>General bug fixing.</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+        </div>
+      </article>
+
+      <article class="tab-panel" id="experience" role="tabpanel" aria-labelledby="tab-experience">
+        <h2>Work Experience</h2>
+        <div class="card">
+          <strong>Lead Unity Engineer - Harmony Games</strong>
+          <p class="meta">May 2022 - Current</p>
+          <ul>
+            <li>Developing multiplayer mobile game features end-to-end using Unity and Photon Quantum, including mechanics, architecture, UI, prototyping, testing and bug fixing.</li>
+            <li>Building internal tools to speed up design iteration over game settings and visuals.</li>
+            <li>Leading the engineering team, mentoring developers, and writing architecture and feature documentation.</li>
+            <li>Working across gameplay and meta systems, including customization features.</li>
+            <li>Driving continuous performance improvements to keep high FPS across supported devices.</li>
+            <li>Applying AI tooling (Cursor + Claude Code/GPT Codex) to improve delivery speed and team productivity.</li>
+          </ul>
+        </div>
+
+        <div class="card" style="margin-top: 12px;">
+          <strong>Senior Unity Engineer - N3TWORK Studios</strong>
+          <p class="meta">Aug 2020 - May 2022</p>
+          <ul>
+            <li>Developed and tested new features for Adventure Mode on mobile Tetris.</li>
+            <li>Implemented multiple server-side rules for A/B testing.</li>
+            <li>Integrated UI for screens, windows and pop-ups following MVVM architecture.</li>
+            <li>Created tools to quickly download and process art assets for multiple screens.</li>
+            <li>Refactored scripts and data schemes to optimize data usage across game data files.</li>
+          </ul>
+        </div>
+
+        <div class="card" style="margin-top: 12px;">
+          <strong>Senior Unity Engineer - Infinity Games</strong>
+          <p class="meta">Jun 2019 - Aug 2020</p>
+          <ul>
+            <li>Developed casual and hyper-casual games through the full production pipeline, from mechanics and shaders to launch.</li>
+            <li>Participated in industry seminars and applied hard/soft success criteria to game development decisions.</li>
+            <li>Contributed to ideation sessions for new game themes and mechanics.</li>
+            <li>Integrated UI and SDKs including In-App Purchase, Analytics and ad packages.</li>
+            <li>Built reusable company tools for asset loading, prefab workflows and stress testing scenarios.</li>
+          </ul>
+        </div>
+
+        <div class="card" style="margin-top: 12px;">
+          <strong>Game Developer - Kokku</strong>
+          <p class="meta">Mar 2017 - Jun 2019</p>
+          <ul>
+            <li>Developed educational and casual mobile games using Unity and Cocos Creator.</li>
+            <li>Worked on backend services with Firebase/TypeScript, including QRCode-based data retrieval flows.</li>
+            <li>Implemented AR experiences with Vuforia and animated 3D models over tracked surfaces.</li>
+            <li>Worked on Unity/Cocos WebGL and mobile web builds, including porting and engine-version updates.</li>
+            <li>Built ReactJS web tools for remote client-side asset swapping.</li>
+            <li>Contributed to visual effects, physics and performance/memory optimizations on an Unreal AAA project.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="tab-panel" id="education" role="tabpanel" aria-labelledby="tab-education">
+        <div class="card">
+          <strong>Federal University of Pernambuco (UFPE)</strong>
+          <ul>
+            <li>Master's Degree in Computer Science / Computer Graphics.</li>
+            <li>Bachelor's Degree in Computer Science.</li>
+            <li>Teaching assistant in Algorithms and Data Structures.</li>
+          </ul>
+        </div>
+
+        <div class="card" style="margin-top: 12px;">
+          <strong>Apple Developer Academy (Apple/UFPE)</strong>
+          <ul>
+            <li>Worked as iOS developer creating apps for iOS, Apple Watch, tvOS and macOS.</li>
+            <li>Used Xcode, Objective-C and Swift for multi-platform Apple ecosystem development.</li>
+          </ul>
+        </div>
+
+        <div class="card" style="margin-top: 12px;">
+          <strong>Young Talents for Science (UFPE)</strong>
+          <ul>
+            <li>Studied software engineering, programming patterns and software contracts.</li>
+          </ul>
+        </div>
+
+        <div class="card" style="margin-top: 12px;">
+          <strong>Courses</strong>
+          <ul>
+            <li>Shader Development for Unity3D (Shaderlab, HLSL and Shader Graph).</li>
+            <li>Unity Compute Shaders.</li>
+            <li>Machine Learning with Unity3D, including Artificial Neural Networks in game context.</li>
+            <li>Unity DOTS/ECS.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="tab-panel" id="awards" role="tabpanel" aria-labelledby="tab-awards">
+        <div class="card">
+          <div class="awards-items">
+            <p class="awards-item">&#x1F4BB; 12th place in the Brazilian ACM International Collegiate Programming Contest.</p>
+            <p class="awards-item">&#x1F947; Gold medal in OBMEP (Brazilian Olympiad of Mathematics).</p>
+            <p class="awards-item">&#x1F948; Silver medal in OBMEP (Brazilian Olympiad of Mathematics).</p>
+            <p class="awards-item">&#x1F949; Bronze medal in OBMEP (Brazilian Olympiad of Mathematics).</p>
+          </div>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <script>
+    const tabs = document.querySelectorAll('.tab-btn');
+    const panels = document.querySelectorAll('.tab-panel');
+
+    function activateTab(tabId) {
+      tabs.forEach((btn) => {
+        const isActive = btn.dataset.tab === tabId;
+        btn.classList.toggle('active', isActive);
+        btn.setAttribute('aria-selected', String(isActive));
+      });
+
+      panels.forEach((panel) => {
+        panel.classList.toggle('active', panel.id === tabId);
+      });
+
+      if (tabId === 'projects') {
+        collapseAllProjectDetails();
+      }
+    }
+
+    tabs.forEach((btn) => {
+      btn.addEventListener('click', () => activateTab(btn.dataset.tab));
+    });
+
+    const projectPanels = document.querySelectorAll('.project-panel');
+    const projectData = {
+      '2 Player Games': {
+        skills: ['Unity', 'C#', 'UGUI', 'Mobile', 'Shaders', 'Game Architecture', 'Git/GitHub']
+      },
+      '1 2 3 4 Player Games': {
+        skills: ['Unity', 'C#', 'UGUI', 'Mobile', 'Shaders', 'Game Architecture', 'Git/GitHub']
+      },
+      'Chef Rescue': {
+        skills: ['Unity', 'C#', 'Mobile', 'In App Purchase', 'Analytics', 'Ads SDKs']
+      },
+      'Cookie Jam': {
+        skills: ['Unity', 'C#', 'Mobile', 'UGUI', 'Shaders', 'Universal Render Pipeline']
+      },
+      'El Reino Infantil': {
+        skills: ['Unity', 'C#', 'AR', 'Backend Integration', 'Firebase', 'Mobile']
+      },
+      'Growtopia': {
+        skills: ['C/C++', 'Backend Integration', 'Profiling', 'Refactoring', 'Optimization']
+      },
+      'Logic Pic': {
+        skills: ['Unity', 'C#', 'Mobile', 'UGUI', 'Design Patterns', 'In App Purchase', 'Analytics', 'Ads SDKs']
+      },
+      'Overloot': {
+        skills: ['Unity', 'C#', 'Mobile', 'Optimization']
+      },
+      'Silhouette Art': {
+        skills: ['Unity', 'C#', 'Mobile', '2D/3D Mathematics and Physics', 'Addressables', 'Optimization']
+      },
+      'Tetris': {
+        skills: ['Unity', 'C#', 'Mobile', 'Addressables', 'Backend Integration', 'In App Purchase', 'Analytics']
+      },
+      'The Forgotten City': {
+        skills: ['Unreal', 'C/C++', 'Refactoring', 'Optimization', 'Algorithms and Data Structures']
+      },
+      'We Are Illuminati': {
+        skills: ['Unity', 'C#', 'Mobile', 'In App Purchase', 'Analytics', 'Game Architecture']
+      },
+      'Zorro The Chronicles': {
+        skills: ['Unity', 'C#', 'PC/Console', 'Addressables', 'UGUI', 'UI Toolkit', 'Refactoring']
+      }
+    };
+
+    projectPanels.forEach((panel) => {
+      const titleEl = panel.querySelector('.project-title');
+      const contentEl = panel.querySelector('.project-content');
+      const toggleEl = panel.querySelector('.project-toggle');
+      const gifEl = panel.querySelector('.project-gif');
+
+      const title = titleEl ? titleEl.textContent.trim() : '';
+      const data = projectData[title];
+
+      if (titleEl && contentEl && toggleEl && !panel.querySelector('.project-skills')) {
+        const skillsWrap = document.createElement('div');
+        skillsWrap.className = 'project-skills';
+        (data && data.skills ? data.skills : ['Unity', 'C#', 'Mobile', 'Game Design']).forEach((skill) => {
+          const chip = document.createElement('span');
+          chip.className = 'skill-chip';
+          chip.textContent = skill;
+          skillsWrap.appendChild(chip);
+        });
+        contentEl.insertBefore(skillsWrap, toggleEl);
+      }
+
+      if (titleEl && gifEl && !panel.querySelector('.project-store-btn')) {
+        const storeBtn = document.createElement('a');
+        const fallbackSearchUrl = `https://www.google.com/search?q=${encodeURIComponent(titleEl.textContent.trim() + ' game store')}`;
+        const customUrl = panel.dataset.storeUrl ? panel.dataset.storeUrl.trim() : '';
+        storeBtn.className = 'project-store-btn';
+        storeBtn.href = customUrl || fallbackSearchUrl;
+        storeBtn.target = '_blank';
+        storeBtn.rel = 'noopener noreferrer';
+        storeBtn.textContent = 'Store';
+        panel.insertBefore(storeBtn, gifEl);
+      }
+    });
+
+    const toggles = document.querySelectorAll('.project-toggle');
+
+    function setToggleCollapsed(toggle, desc) {
+      toggle.textContent = 'See role details';
+      toggle.setAttribute('aria-expanded', 'false');
+      if (desc && toggle !== desc.previousElementSibling) {
+        desc.insertAdjacentElement('beforebegin', toggle);
+      }
+    }
+
+    function setToggleExpanded(toggle, desc) {
+      toggle.textContent = 'Hide role details';
+      toggle.setAttribute('aria-expanded', 'true');
+      if (desc && toggle !== desc.nextElementSibling) {
+        desc.insertAdjacentElement('afterend', toggle);
+      }
+    }
+
+    function collapseAllProjectDetails() {
+      document.querySelectorAll('.project-desc').forEach((desc) => {
+        desc.classList.remove('open');
+        const content = desc.closest('.project-content');
+        const toggle = content ? content.querySelector('.project-toggle') : null;
+        const panel = desc.closest('.project-panel');
+        if (panel) {
+          panel.classList.remove('project-panel-expanded');
+        }
+        if (toggle && toggle.classList.contains('project-toggle')) {
+          setToggleCollapsed(toggle, desc);
+        }
+      });
+    }
+
+    collapseAllProjectDetails();
+
+    toggles.forEach((toggle) => {
+      toggle.addEventListener('click', () => {
+        const content = toggle.closest('.project-content');
+        const desc = content ? content.querySelector('.project-desc') : null;
+        if (!desc) {
+          return;
+        }
+
+        const willOpen = !desc.classList.contains('open');
+
+        document.querySelectorAll('.project-desc.open').forEach((openDesc) => {
+          if (openDesc !== desc) {
+            openDesc.classList.remove('open');
+            const otherContent = openDesc.closest('.project-content');
+            const otherToggle = otherContent ? otherContent.querySelector('.project-toggle') : null;
+            const otherPanel = openDesc.closest('.project-panel');
+            if (otherPanel) {
+              otherPanel.classList.remove('project-panel-expanded');
+            }
+            if (otherToggle && otherToggle.classList.contains('project-toggle')) {
+              setToggleCollapsed(otherToggle, openDesc);
+            }
+          }
+        });
+
+        desc.classList.toggle('open', willOpen);
+        const currentPanel = desc.closest('.project-panel');
+        if (currentPanel) {
+          currentPanel.classList.toggle('project-panel-expanded', willOpen);
+        }
+        if (willOpen) {
+          setToggleExpanded(toggle, desc);
+        } else {
+          setToggleCollapsed(toggle, desc);
+        }
+      });
+    });
+  </script>
+</body>
+</html>
